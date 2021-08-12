@@ -3,7 +3,7 @@ import './form.css'
 
 const ReactContact = () => {
 
-    const[user, setUser] = useState({
+    const [user, setUser] = useState({
         txtName:'',
         txtLName:'',
         txtEmail:'',
@@ -15,9 +15,7 @@ const ReactContact = () => {
     const getUserData = (e) => {
         name= e.target.name;
         value= e.target.value;
-
         setUser({...user, [name]:value})
-
     }
 
     const onSubmit = async (e) => {
@@ -25,36 +23,33 @@ const ReactContact = () => {
 
         const {txtName,txtLName,txtEmail,txtPhone,txtMessage} = user
         if(txtName && txtLName && txtEmail && txtPhone && txtMessage) {
-            const res = await fetch("https://react-form-234a8-default-rtdb.firebaseio.com/aureatedb.json",{
-            method:"POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                txtName,
-                txtLName,
-                txtEmail,
-                txtPhone,
-                txtMessage
+                const res = await fetch("https://react-form-234a8-default-rtdb.firebaseio.com/aureatedb.json",{
+                method:"POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    txtName,
+                    txtLName,
+                    txtEmail,
+                    txtPhone,
+                    txtMessage
+                })
             })
-        })
 
-        if(res){
-            setUser({
-                txtName:'',
-                txtLName:'',
-                txtEmail:'',
-                txtPhone:'',
-                txtMessage:''
-            });
-            alert("Data Stored Successfully")
-        }
+            if(res){
+                setUser({
+                    txtName:'',
+                    txtLName:'',
+                    txtEmail:'',
+                    txtPhone:'',
+                    txtMessage:''
+                });
+                alert("Data Stored Successfully")
+            }
         } else {
             alert("Please fill all the blanks")
         }
-
-        
-        
     }
 
     return (
